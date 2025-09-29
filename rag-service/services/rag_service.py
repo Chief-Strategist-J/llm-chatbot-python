@@ -1,4 +1,4 @@
-from typing import List
+from typing import Any, Dict, List
 from services.embedding_service import EmbeddingService
 from services.qdrant_service import QdrantService
 from core.models import SearchResult
@@ -8,7 +8,7 @@ class RAGService:
         self.embedding_service: EmbeddingService = EmbeddingService()
         self.qdrant_service: QdrantService = QdrantService()
     
-    def search_and_generate(self, query: str, limit: int = 3) -> dict[str, any]:
+    def search_and_generate(self, query: str, limit: int = 3) -> Dict[str, Any]:
         query_embedding: List[float] = self.embedding_service.embed_text(query)
         search_results: List[SearchResult] = self.qdrant_service.search(query_embedding, limit)
         
